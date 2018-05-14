@@ -1,0 +1,25 @@
+{
+  "name": "@resource-sentry/writer-es2015",
+  "version": "1.0.0",
+  "description": "Resource Sentry Writer with an output target as ECMAScript 2015.",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/resource-sentry/writer-es2015.git"
+  },
+  "keywords": [
+    "writer",
+    "es6",
+    "es2015",
+    "generate"
+  ],
+  "author": "Nicolas Siver",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/resource-sentry/writer-es2015/issues"
+  },
+  "homepage": "https://github.com/resource-sentry/writer-es2015#readme"
+}
