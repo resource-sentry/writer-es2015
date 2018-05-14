@@ -1,6 +1,6 @@
-const Categories = require('../../model/categories');
-const CategoryNames = require('../../model/category-names');
-const Constants = require('../../model/constants');
+const Categories    = require('@resource-sentry/utils/lib/categories'),
+      CategoryNames = require('@resource-sentry/utils/lib/category-names'),
+      Constants     = require('./model/constants');
 
 class CodeGenerator {
     constructor(categories) {
