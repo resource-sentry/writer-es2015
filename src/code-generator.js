@@ -27,8 +27,8 @@ class CodeGenerator {
     }
 
     getData() {
-        let output = [];
         let properties;
+        let output = [];
 
         this.categories.forEach((category, code) => {
             properties = category.map(({id, value}) => `'${id}':${JSON.stringify(value)}`);
@@ -40,27 +40,27 @@ class CodeGenerator {
     }
 
     getKeyCodes(values, category) {
-        let valueDescription;
+        let name, fullId, id, value, valueDescription;
         let i = 0, len = values.length;
         let result = [];
-        let name, id, value;
 
         for (i; i < len; ++i) {
             valueDescription = values[i];
-            id = (category << Constants.RESOURCE_SIZE) + i;
+            fullId = (category << Constants.RESOURCE_SIZE) + i;
+            id = i;
             name = this.convertVariableName(valueDescription.name);
             value = this.convertVariableValue(valueDescription.value, category);
-            result.push({name, id, value});
+            result.push({name, fullId, id, value});
         }
         return result;
     }
 
     getKeys() {
-        let output = [];
         let properties;
+        let output = [];
 
         this.categories.forEach((category, code) => {
-            properties = category.map(({name, id}) => `${name}:${id}`);
+            properties = category.map(({name, fullId}) => `${name}:${fullId}`);
             output.push(`export let ${CategoryNames[code]} = {${properties}};`);
         });
 
