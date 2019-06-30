@@ -26,11 +26,15 @@ class CodeGenerator {
         }
     }
 
+    getCategories() {
+        return this.categories;
+    }
+
     getData() {
         let properties;
         let output = [];
 
-        this.categories.forEach((category, code) => {
+        this.getCategories().forEach((category, code) => {
             properties = category.map(({id, value}) => `'${id}':${JSON.stringify(value)}`);
             output.push(`// ${CategoryNames[code]}`);
             output.push(`data[${code}] = {${properties}};`);
@@ -52,6 +56,12 @@ class CodeGenerator {
             value = this.convertVariableValue(valueDescription.value, category);
             result.push({name, fullId, id, value});
         }
+
+        // Sort key-code pairs by name
+        result.sort((left, right) => {
+            return left.name.localeCompare(right.name);
+        });
+
         return result;
     }
 
@@ -59,7 +69,7 @@ class CodeGenerator {
         let properties;
         let output = [];
 
-        this.categories.forEach((category, code) => {
+        this.getCategories().forEach((category, code) => {
             properties = category.map(({name, fullId}) => `${name}:${fullId}`);
             output.push(`export let ${CategoryNames[code]} = {${properties}};`);
         });

@@ -40,7 +40,7 @@ describe('Code Generator', () => {
             {name: 'ERROR_EPIC'},
             {name: 'ERROR_FATAL'},
             {name: 'TEXT_ACTUAL_ACTIVE'},
-            {name: 'TEXT_ACTUAL_HINT'},
+            {name: 'TEXT_ACTUAL_HELP'},
             {name: 'TEXT_ACTUAL_VISIT_EXTRA'},
             {name: 'TEXT_ACTUAL_VISIT_NOW'}
         ]);
