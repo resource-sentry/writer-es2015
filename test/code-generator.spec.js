@@ -64,6 +64,15 @@ describe('Code Generator', () => {
         ]);
     });
 
+    it('parses hex colors', () => {
+        expect(generator.getCategories()[Categories.COLOR]).toMatchObject([
+            {value: 16753920},
+            {value: 0},
+            {value: 16777215},
+            {value: 16776960}
+        ]);
+    });
+
     it('sorts graphics by name', () => {
         expect(generator.getCategories()[Categories.GRAPHIC]).toMatchObject([
             {name: 'ICON_LOGIN'},

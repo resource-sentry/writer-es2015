@@ -30,10 +30,10 @@ data[Categories.DIMENSION] = [
 ];
 
 data[Categories.COLOR] = [
-    {name: 'sad-yellow', value: 16776960},
-    {name: 'list-item-white', value: 16777215},
+    {name: 'sad-yellow', value: 'FFFF00'},
+    {name: 'list-item-white', value: 'FFFFFF'},
     {name: 'list-item-black', value: 0},
-    {name: 'accent-orange', value: 16744192}
+    {name: 'accent-orange', value: 'FFA500'}
 ];
 
 data[Categories.GRAPHIC] = [
