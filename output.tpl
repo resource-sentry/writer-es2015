@@ -3,6 +3,8 @@ const RESOURCE_SIZE = %RESOURCE_SIZE%;
 const CATEGORY_MASK = ((1 << CATEGORY_SIZE) - 1) << RESOURCE_SIZE;
 const RESOURCE_MASK = (1 << RESOURCE_SIZE) - 1;
 
+%LANGUAGES%
+
 %KEYS%
 
 let data = [];
@@ -13,4 +15,7 @@ export function getResource(resourceId) {
     const resource = (resourceId & RESOURCE_MASK);
 
     return data[category][resource];
+}
+
+export function getText(resourceId, locale) {
 }

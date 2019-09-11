@@ -4,7 +4,11 @@ const Categories    = require('@resource-sentry/utils/lib/categories'),
 
 class CodeGenerator {
     constructor(categories) {
-        this.categories = categories.map((values, category) => this.getKeyCodes(values, category));
+        let categoriesData = categories.slice();
+        // Remove Languages from the categories list for flat keys/value structure
+        categoriesData.splice(Categories.LANGUAGE, 1);
+        this.languages = categories[Categories.LANGUAGE] || [];
+        this.categories = categoriesData.map((values, category) => this.getKeyCodes(values, category));
     }
 
     convertVariableName(name) {
@@ -75,6 +79,21 @@ class CodeGenerator {
         });
 
         return output.join('\n');
+    }
+
+    getLanguages() {
+        return this.languages;
+    }
+
+    getLanguageTagVocabulary() {
+        let vocabulary = {};
+        let cursor = 0;
+
+        this.getLanguages().forEach(({name}) => {
+            vocabulary[name] = cursor++;
+        });
+
+        return `let languages = ${JSON.stringify(vocabulary)};`;
     }
 }
 
