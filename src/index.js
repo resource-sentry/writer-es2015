@@ -1,9 +1,10 @@
-const Promise    = require('bluebird'),
+const BaseWriter = require('@resource-sentry/utils/lib/base-writer'),
+      Promise    = require('bluebird'),
+      Categories = require('@resource-sentry/utils/lib/categories'),
       fsNative   = require('fs'),
+      Logger     = require('@resource-sentry/utils/lib/logger'),
       path       = require('path'),
-      prettier   = require('prettier'),
-      BaseWriter = require('@resource-sentry/utils/lib/base-writer'),
-      Logger     = require('@resource-sentry/utils/lib/logger');
+      prettier   = require('prettier');
 
 const CodeGenerator = require('./code-generator'),
       Constants     = require('./model/constants');
@@ -53,6 +54,7 @@ class Es2015Writer extends BaseWriter {
             })
             .then(template => {
                 return template
+                    .replace('%CATEGORY_LANGUAGE%', Categories.LANGUAGE)
                     .replace('%CATEGORY_SIZE%', Constants.CATEGORY_SIZE)
                     .replace('%RESOURCE_SIZE%', Constants.RESOURCE_SIZE);
             })
