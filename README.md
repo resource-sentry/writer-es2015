@@ -4,6 +4,9 @@ Resource Sentry Writer with an output target as ECMAScript 2015.
 
 Represents category types as ES6 module with simple API.
 
+Use `Rs.getText(ID, locale)` for multi-language support.
+Current implementation performs RFC 4647 Lookup to find the best language for the provided locale.
+
 ![Version](https://img.shields.io/npm/v/@resource-sentry/writer-es2015.svg)
 ![Dependencies](https://david-dm.org/resource-sentry/writer-es2015.svg)
 
