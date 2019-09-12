@@ -44,6 +44,8 @@ class CodeGenerator {
             output.push(`data[${code}] = {${properties}};`);
         });
 
+        output = output.concat(this.getLanguageData());
+
         return output.join('\n');
     }
 
@@ -81,8 +83,36 @@ class CodeGenerator {
         return output.join('\n');
     }
 
+    getLanguageData() {
+        let id, languageCode, languageValues;
+        let output = [];
+        let languageData = [];
+        let vocabulary = this.getLanguageTagVocabulary();
+
+        this.getLanguages().forEach(language => {
+            languageCode = vocabulary[language.name];
+            languageValues = language.value;
+
+            output.push(`// ${CategoryNames[Categories.LANGUAGE]}: ${language.name}`);
+
+            // Builds list of data with values without Text Category but positioned in the language codes
+            languageValues.forEach(({value}, index) => {
+                id = (languageCode << (Constants.RESOURCE_SIZE + Constants.CATEGORY_SIZE)) + index;
+                languageData.push(`'${id}':${JSON.stringify(value)}`);
+            });
+        });
+
+        output.push(`data[${Categories.LANGUAGE}] = {${languageData}}`);
+
+        return output;
+    }
+
     getLanguages() {
         return this.languages;
+    }
+
+    getLanguageTagOutput() {
+        return `let languages = ${JSON.stringify(this.getLanguageTagVocabulary())};`;
     }
 
     getLanguageTagVocabulary() {
@@ -90,10 +120,10 @@ class CodeGenerator {
         let cursor = 0;
 
         this.getLanguages().forEach(({name}) => {
-            vocabulary[name] = cursor++;
+            vocabulary[name.toLowerCase()] = cursor++;
         });
 
-        return `let languages = ${JSON.stringify(vocabulary)};`;
+        return vocabulary;
     }
 }
 

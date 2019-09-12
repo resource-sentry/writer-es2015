@@ -59,7 +59,7 @@ class Es2015Writer extends BaseWriter {
             .then(template => {
                 let generator = new CodeGenerator(content);
                 return template
-                    .replace('%LANGUAGES%', generator.getLanguageTagVocabulary())
+                    .replace('%LANGUAGES%', generator.getLanguageTagOutput())
                     .replace('%KEYS%', generator.getKeys())
                     .replace('%DATA%', generator.getData());
             })
