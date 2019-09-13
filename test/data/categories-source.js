@@ -45,16 +45,16 @@ data[Categories.GRAPHIC] = [
 
 data[Categories.LANGUAGE] = [
     {
+        name : 'de',
+        value: [{key: 'hello', value: 'hallo'}, {key: 'world', value: 'wereld'}, {key: 'bat', value: 'knuppel'}]
+    },
+    {
         name : 'en',
         value: [{key: 'hello', value: 'hello'}, {key: 'world', value: 'world'}, {key: 'bat', value: 'bat'}]
     },
     {
         name : 'es',
         value: [{key: 'hello', value: 'hola'}, {key: 'world', value: 'mundo'}, {key: 'bat', value: 'bate'}]
-    },
-    {
-        name : 'de',
-        value: [{key: 'hello', value: 'hallo'}, {key: 'world', value: 'wereld'}, {key: 'bat', value: 'knuppel'}]
     }
 ];
 
