@@ -4,7 +4,11 @@ const Categories    = require('@resource-sentry/utils/lib/categories'),
 
 class CodeGenerator {
     constructor(categories) {
-        this.categories = categories.map((values, category) => this.getKeyCodes(values, category));
+        let categoriesData = categories.slice();
+        // Remove Languages from the categories list for flat keys/value structure
+        categoriesData.splice(Categories.LANGUAGE, 1);
+        this.languages = categories[Categories.LANGUAGE] || [];
+        this.categories = categoriesData.map((values, category) => this.getKeyCodes(values, category));
     }
 
     convertVariableName(name) {
@@ -39,6 +43,8 @@ class CodeGenerator {
             output.push(`// ${CategoryNames[code]}`);
             output.push(`data[${code}] = {${properties}};`);
         });
+
+        output = output.concat(this.getLanguageData());
 
         return output.join('\n');
     }
@@ -75,6 +81,49 @@ class CodeGenerator {
         });
 
         return output.join('\n');
+    }
+
+    getLanguageData() {
+        let id, languageCode, languageValues;
+        let output = [];
+        let languageData = [];
+        let vocabulary = this.getLanguageTagVocabulary();
+
+        this.getLanguages().forEach(language => {
+            languageCode = vocabulary[language.name];
+            languageValues = language.value;
+
+            output.push(`// ${CategoryNames[Categories.LANGUAGE]}: ${language.name}`);
+
+            // Builds list of data with values without Text Category but positioned in the language codes
+            languageValues.forEach(({value}, index) => {
+                id = (languageCode << (Constants.RESOURCE_SIZE + Constants.CATEGORY_SIZE)) + index;
+                languageData.push(`'${id}':${JSON.stringify(value)}`);
+            });
+        });
+
+        output.push(`data[${Categories.LANGUAGE}] = {${languageData}}`);
+
+        return output;
+    }
+
+    getLanguages() {
+        return this.languages;
+    }
+
+    getLanguageTagOutput() {
+        return `let languages = ${JSON.stringify(this.getLanguageTagVocabulary())};`;
+    }
+
+    getLanguageTagVocabulary() {
+        let vocabulary = {};
+        let cursor = 0;
+
+        this.getLanguages().forEach(({name}) => {
+            vocabulary[name.toLowerCase()] = cursor++;
+        });
+
+        return vocabulary;
     }
 }
 

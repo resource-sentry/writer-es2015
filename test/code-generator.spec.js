@@ -82,4 +82,10 @@ describe('Code Generator', () => {
         ]);
     });
 
+    it('creates language vocabulary', () => {
+        expect(generator.getLanguageTagVocabulary()).toMatchObject({
+            de: 0, en: 1, es: 2
+        })
+    });
+
 });
