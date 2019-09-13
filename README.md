@@ -27,4 +27,5 @@ import Rs from './rs';
 
 Rs.getResource(Rs.Text.HELLO); 
 Rs.getResource(Rs.Value.EASY_COUNT); 
+Rs.getText(Rs.Text.WORLD, 'en-US');
 ```
