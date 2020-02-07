@@ -68,6 +68,7 @@ class Es2015Writer extends BaseWriter {
             .then(template => {
                 return prettier.format(template, {
                     bracketSpacing: false,
+                    parser        : 'babel',
                     singleQuote   : true
                 });
             })
